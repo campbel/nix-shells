@@ -40,6 +40,7 @@ stdenv.mkDerivation {
     '';
     shellHook = ''
         export STARSHIP_CONFIG="$HOME/.config/starship.nix.toml"
+        zsh
     '';
 }
 
