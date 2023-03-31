@@ -21,11 +21,23 @@ stdenv.mkDerivation {
         vim
     ];
     shellHook = ''
+        echo "Installing dotfiles..."
+        git -C "${dotfiles}" submodule update --init --recursive
+
         echo "Linking dotfiles..."
+        for i in "${dotfiles}"/dotfiles/*; do
+            echo -e ".$(basename "$i")"
+            [ -d ~/."$(basename "$i")" ] && rm -rf ~/."$(basename "$i")"
+            ln -sf "$i" ~/."$(basename "$i")"
+        done
+
+        echo "Linking config..."
         mkdir -p ~/.config
-        ln -sf ${dotfiles}/config/starship.nix.toml ~/.config/starship.toml
-        ln -sf ${dotfiles}/dotfiles/zshrc ~/.zshrc
-        ln -sf ${dotfiles}/dotfiles/zprofile ~/.zprofile
+        for i in "${dotfiles}"/config/*; do
+            echo -e "$(basename "$i")"
+            [ -d ~/.config/"$(basename "$i")" ] && rm -rf ~/.config/"$(basename "$i")"
+            ln -sf "$i" ~/.config/"$(basename "$i")"
+        done
     '';
 }
 
