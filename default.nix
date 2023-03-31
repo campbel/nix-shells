@@ -30,7 +30,7 @@ stdenv.mkDerivation {
             ln -sf "$i" ~/."$(basename "$i")"
         done
 
-        echo "[Linking config]
+        echo "[Linking config]"
         mkdir -p ~/.config
         for i in "${dotfiles}"/config/*; do
             echo -e "$(basename "$i")"
