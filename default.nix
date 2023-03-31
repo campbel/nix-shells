@@ -39,7 +39,6 @@ stdenv.mkDerivation {
         done
     '';
     shellHook = ''
-        echo "[Setting environment variables]"
         export STARSHIP_CONFIG="$HOME/.config/starship.nix.toml"
     '';
 }
