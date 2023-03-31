@@ -37,10 +37,11 @@ stdenv.mkDerivation {
             [ -d ~/.config/"$(basename "$i")" ] && rm -rf ~/.config/"$(basename "$i")"
             ln -sf "$i" ~/.config/"$(basename "$i")"
         done
+
+        chsh -s zsh
     '';
     shellHook = ''
         export STARSHIP_CONFIG="$HOME/.config/starship.nix.toml"
-        zsh
     '';
 }
 
