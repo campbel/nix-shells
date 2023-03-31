@@ -39,7 +39,7 @@ stdenv.mkDerivation {
         done
         
         echo "[Setting environment variables]"
-        export STARSHIP_CONFIG="~/.config/starship.nix.toml"
+        export STARSHIP_CONFIG="$HOME/.config/starship.nix.toml"
     '';
 }
 
