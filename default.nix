@@ -20,7 +20,7 @@ stdenv.mkDerivation {
         starship
         vim
     ];
-    shellHook = ''
+    postInstall = ''
         git -C "${dotfiles}" submodule update --init --recursive
 
         echo "[Linking dotfiles]"
@@ -37,7 +37,8 @@ stdenv.mkDerivation {
             [ -d ~/.config/"$(basename "$i")" ] && rm -rf ~/.config/"$(basename "$i")"
             ln -sf "$i" ~/.config/"$(basename "$i")"
         done
-        
+    '';
+    shellHook = ''
         echo "[Setting environment variables]"
         export STARSHIP_CONFIG="$HOME/.config/starship.nix.toml"
     '';
